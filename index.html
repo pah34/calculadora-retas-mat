@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Retas</title>
+</head>
+
+<body>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Comfortaa', cursive;
+            background-color: #f0f4f8;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: #3e64ff;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3e64ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #5a86ff;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+
+    <h2>Calculadora de Retas</h2>
+
+    <p>1ª Reta (Ax + By + C = 0):</p>
+    <label>A1: <input type="number" id="A1"></label><br>
+    <label>B1: <input type="number" id="B1"></label><br>
+    <label>C1: <input type="number" id="C1"></label><br><br>
+
+    <p>2ª Reta (Ax + By + C = 0):</p>
+    <label>A2: <input type="number" id="A2"></label><br>
+    <label>B2: <input type="number" id="B2"></label><br>
+    <label>C2: <input type="number" id="C2"></label><br><br>
+
+    <button onclick="verificarRelacao()">Verificar Relação</button>
+
+    <h3 id="resultado"></h3>
+
+    <script>
+
+        function verificarRelacao() {
+
+            let A1 = parseFloat(document.getElementById("A1").value);
+            let B1 = parseFloat(document.getElementById("B1").value);
+            let C1 = parseFloat(document.getElementById("C1").value);
+            let A2 = parseFloat(document.getElementById("A2").value);
+            let B2 = parseFloat(document.getElementById("B2").value);
+            let C2 = parseFloat(document.getElementById("C2").value);
+
+            if (isNaN(A1) || isNaN(B1) || isNaN(C1) || isNaN(A2) || isNaN(B2) || isNaN(C2)) {
+                document.getElementById("resultado").innerText = "preencha todos os valores";
+                return;
+            }
+
+            let resultado = "";
+
+            if (A1 * B2 === A2 * B1) {
+                if (A1 * C2 === A2 * C1 && B1 * C2 === B2 * C1) {
+                    resultado = "retas paralelas coincidentes";
+                } else {
+                    resultado = "retas paralelas distintas";
+                }
+            } else {
+                if (A1 * A2 + B1 * B2 === 0) {
+                    resultado = "retas concorrentes perpendiculares";
+                } else {
+                    resultado = "retas concorrentes obliquas";
+                }
+            }
+            document.getElementById("resultado").innerText = resultado;
+        }
+    </script>
+
+    <!-- equação geral da reta: ax + by + c = 0 -->
+
+    <!-- Paralelas coincidentes: ocupam a mesma posição no plano, ou seja, são a mesma reta, têm todos os pontos em comum. -->
+
+    <!-- Paralelas distintas: São retas que não se encontram em nenhum ponto, ou seja, nunca se cruzam, e possuem a mesma inclinação (mesma direção), mas não ocupam o mesmo lugar no plano. -->
+
+    <!-- Retas Concorrentes Perpendiculares: Quando A1.A2 + B1.B2 = 0 -> 90° -->
+
+    <!-- Retas Concorrentes Obliquas: Quando A1.A2 + B1.B2 != 0 -> diferente de 90° -->
+
+</body>
+
+</html>
